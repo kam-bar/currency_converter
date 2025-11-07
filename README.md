@@ -17,3 +17,6 @@ Currency Converter is a lightweight web app built with HTML, CSS, and JavaScript
 ## Demo
 
 https://kam-bar.github.io/currency_converter/
+
+
+![currency_converter](https://i.postimg.cc/kM6z3PF9/Zrzut-ekranu-2025-11-7-o-23-58-37.png)
