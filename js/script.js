@@ -1,45 +1,42 @@
-console.log("Witam serdecznie!");
+{
+    const calculateResult = (amount, currency) => {
+        const rateEUR = 4.4278;
+        const rateGBP = 4.9384;
+        const rateUSD = 3.9058;
 
-const formElement = document.querySelector(".js-form");
-const amountElement = document.querySelector(".js-amount");
-const currencyElement = document.querySelector(".js-currency");
-const resultElement = document.querySelector(".js-result");
+        switch (currency) {
+            case "EUR":
+                return amount / rateEUR;
+            case "GBP":
+                return amount / rateGBP;
+            case "USD":
+                return amount / rateUSD;
+        }
+    };
 
-const calculateResult = (amount, currency) => {
-    const rateEUR = 4.28;
-    const rateGBP = 4.85;
-    const rateUSD = 3.69;
+    const updateResultText = (amount, result, currency) => {
+        const resultElement = document.querySelector(".js-result");
+        resultElement.innerHTML = `${amount.toFixed(2)} PLN = <strong>${result.toFixed(2)} ${currency}</strong>`;
+    };
 
-    switch (currency) {
-        case "EUR":
-            return amount / rateEUR;
-        case "GBP":
-            return amount / rateGBP;
-        case "USD":
-            return amount / rateUSD;
-        default:
-            return null;
-    }
-};
+    const onFormSubmit = (event) => {
+        event.preventDefault();
 
-const updateResult = (result, currency) => {
-    resultElement.innerText = `${result.toFixed(2)} ${currency}`;
-};
+        const amountElement = document.querySelector(".js-amount");
+        const currencyElement = document.querySelector(".js-currency");
 
-const onFormSubmit = (event) => {
-    event.preventDefault();
+        const amount = +amountElement.value;
+        const currency = currencyElement.value;
 
-    const amount = +amountElement.value;
-    const currency = currencyElement.value;
+        const result = calculateResult(amount, currency);
 
-    const result = calculateResult(amount, currency);
+        updateResultText(amount, result, currency);
+    };
 
-    if (result === null) {
-        alert("Nieznana waluta!");
-        return;
-    }
+    const init = () => {
+        const formElement = document.querySelector(".js-form");
+        formElement.addEventListener("submit", onFormSubmit);
+    };
 
-    updateResult(result, currency);
-};
-
-formElement.addEventListener("submit", onFormSubmit);
+    init();
+}
